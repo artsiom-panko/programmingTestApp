@@ -1,4 +1,4 @@
-package com.panko.programmingTestApp.models;
+package com.panko.testapp.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

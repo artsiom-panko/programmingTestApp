@@ -1,11 +1,8 @@
-package com.panko.programmingTestApp;
+package com.panko.testapp.services;
 
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.panko.programmingTestApp.models.Currency;
+import com.panko.testapp.models.Currency;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
@@ -40,11 +37,13 @@ public class CoinRateService {
 
         Map<String, Double> map = mapper.readValue(currencyNode.toString(), HashMap.class);
 
-        Double highestBitcoinRate = Collections.max(map.entrySet(), Comparator.comparingDouble(Map.Entry::getValue)).getValue();
-        Double lowestBitcoinRate = Collections.min(map.entrySet(), Comparator.comparingDouble(Map.Entry::getValue)).getValue();
+        String currentPrice = getCurrent("RUB");
 
-        System.out.println(highestBitcoinRate);
-        System.out.println(lowestBitcoinRate);
+        String highestBitcoinRate = Collections.max(map.entrySet(), Comparator.comparingDouble(Map.Entry::getValue)).getKey();
+        String lowestBitcoinRate = Collections.min(map.entrySet(), Comparator.comparingDouble(Map.Entry::getValue)).getKey();
+
+        System.out.printf("The highest Bitcoin rate was %s$ on the %s%n", map.get(highestBitcoinRate), highestBitcoinRate);
+        System.out.printf("The lowest Bitcoin rate was %s$ on the %s%n", map.get(lowestBitcoinRate), lowestBitcoinRate);
 
 
 //        Scanner keyboard = new Scanner(System.in);

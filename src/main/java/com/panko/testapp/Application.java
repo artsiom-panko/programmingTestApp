@@ -1,4 +1,6 @@
-package com.panko.programmingTestApp;
+package com.panko.testapp;
+
+import com.panko.testapp.services.CoinRateService;
 
 import java.io.IOException;
 
