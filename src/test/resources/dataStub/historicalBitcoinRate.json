@@ -1,0 +1,14 @@
+{
+  "bpi": {
+    "2020-01-01": 123.4633,
+    "2020-01-02": 6961.5683,
+    "2020-01-03": 7346.58,
+    "2020-01-04": 7355.855,
+    "2020-01-05": 7356.3117
+  },
+  "disclaimer": "This data was produced from the CoinDesk Bitcoin Price Index. BPI value data returned as USD.",
+  "time": {
+    "updated": "Jan 6, 2020 00:03:00 UTC",
+    "updatedISO": "2020-01-06T00:03:00+00:00"
+  }
+}

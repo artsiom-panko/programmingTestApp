@@ -22,7 +22,7 @@ public class BpiProviderService {
      */
     public BpiCurrency getCurrentBitcoinRate(String requestedCurrency) throws IOException {
         String endpointUrl = String.format("https://api.coindesk.com/v1/bpi/currentprice/%s", requestedCurrency);
-        String response = restTemplate.getForObject(endpointUrl, String.class);
+        String response = executeRequest(endpointUrl);
 
         JsonNode currencyNode = Optional.ofNullable(objectMapper.readValue(response, JsonNode.class)
                         .get("bpi")
@@ -44,9 +44,13 @@ public class BpiProviderService {
     public Map<String, Double> getHistoricalData(String startPeriodDate, String endPeriodDate) throws IOException {
         String endpointUrl = String.format("https://api.coindesk.com/v1/bpi/historical/close.json?start=%s&end=%s",
                 startPeriodDate, endPeriodDate);
-        String response = restTemplate.getForObject(endpointUrl, String.class);
+        String response = executeRequest(endpointUrl);
         JsonNode currencyNode = objectMapper.readValue(response, JsonNode.class).get("bpi");
 
         return objectMapper.readValue(currencyNode.toString(), Map.class);
+    }
+
+    public String executeRequest(String endpointUrl) {
+       return restTemplate.getForObject(endpointUrl, String.class);
     }
 }

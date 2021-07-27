@@ -20,9 +20,9 @@ public class BpiCurrency {
         return code;
     }
 
-    public String getRate() {
-        return rate;
-    }
+    public String getRate() { return rate; }
+
+    public float getRateFloat() { return rateFloat; }
 
     public String getDescription() {
         return description;
