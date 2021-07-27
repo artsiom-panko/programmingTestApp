@@ -16,9 +16,6 @@ public class Currency {
     @JsonProperty("rate_float")
     private float rateFloat;
 
-    private float maxRate;
-    private float minRate;
-
     public String getCode() {
         return code;
     }
