@@ -8,7 +8,7 @@ public class ValidationService {
 
     /**
      * Validates the date entered by the user for errors and inaccuracies.
-     * In case of finding errors returns IOException with an error with the corresponding message
+     * In case of finding errors returns IOException with an error with the corresponding message.
      *
      * @param startPeriodDate Start date of the period
      * @param endPeriodDate   End date of the period
@@ -30,17 +30,10 @@ public class ValidationService {
      * @param enteredCurrency Start date of the period
      */
     public void validateEnteredCurrency(String enteredCurrency) throws IOException {
-        if (!isCurrencyCodeExists(enteredCurrency)) {
+        try {
+            java.util.Currency.getInstance(enteredCurrency);
+        } catch (IllegalArgumentException exception) {
             throw new IOException("Incorrect or unsupported currency.");
         }
-    }
-
-    private boolean isCurrencyCodeExists(String currencyCode) {
-        try {
-            java.util.Currency.getInstance(currencyCode);
-        } catch (IllegalArgumentException exception) {
-            return false;
-        }
-        return true;
     }
 }

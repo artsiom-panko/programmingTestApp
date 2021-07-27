@@ -17,12 +17,12 @@ public class BpiDisplayService {
      * The method processes the user's date input and displays
      * the current Bitcoin rate in the requested currency on the screen after validation
      *
-     * @param keyboard Scanner input for getting input from user
+     * @param enteredCurrency Scanner input for getting input from user
      */
     public void displayCurrentBpi(String enteredCurrency) throws IOException {
         validationService.validateEnteredCurrency(enteredCurrency);
 
-        Currency currency = bpiProviderService.getCurrentBitcoinRate(enteredCurrency.toUpperCase());
+        BpiCurrency currency = bpiProviderService.getCurrentBitcoinRate(enteredCurrency.toUpperCase());
 
         out.printf("1 BTC = %s %s (%s)%n", currency.getRate(), currency.getCode(), currency.getDescription());
     }
@@ -31,7 +31,7 @@ public class BpiDisplayService {
      * The method processes the user's date input and displays
      * the lowest and highest Bitcoin rate in requested date range
      *
-     * @param keyboard Scanner input for getting input from user
+     * @param startPeriodDate, @param endPeriodDate Scanner input for getting input from user
      */
     public void displayMaxAndMinBpiRates(String startPeriodDate, String endPeriodDate) throws IOException {
         validationService.validateEnteredDates(startPeriodDate, endPeriodDate);
