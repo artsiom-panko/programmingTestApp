@@ -2,7 +2,7 @@ package com.panko.testapp.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class Currency {
+public class BpiCurrency {
 
     @JsonProperty("code")
     private String code;

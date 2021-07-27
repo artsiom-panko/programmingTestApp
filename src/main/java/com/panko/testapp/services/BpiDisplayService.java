@@ -1,12 +1,11 @@
 package com.panko.testapp.services;
 
-import com.panko.testapp.models.Currency;
+import com.panko.testapp.models.BpiCurrency;
 
 import java.io.IOException;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Map;
-import java.util.Scanner;
 
 import static java.lang.System.out;
 
@@ -14,28 +13,19 @@ public class BpiDisplayService {
     private static final BpiProviderService bpiProviderService = new BpiProviderService();
     private static final ValidationService validationService = new ValidationService();
 
-    // TODO Refactor description
-
     /**
      * The method processes the user's date input and displays
      * the current Bitcoin rate in the requested currency on the screen after validation
      *
      * @param keyboard Scanner input for getting input from user
      */
-    public void displayCurrentBpi(Scanner keyboard) throws IOException {
-        out.print("Enter the currency: ");
-        String enteredCurrency = keyboard.next();
-
+    public void displayCurrentBpi(String enteredCurrency) throws IOException {
         validationService.validateEnteredCurrency(enteredCurrency);
 
         Currency currency = bpiProviderService.getCurrentBitcoinRate(enteredCurrency.toUpperCase());
 
-        out.println(String.format("1 BTC = %s %s (%s)",
-                currency.getRate(), currency.getCode(), currency.getDescription()));
+        out.printf("1 BTC = %s %s (%s)%n", currency.getRate(), currency.getCode(), currency.getDescription());
     }
-
-
-    // TODO Refactor description
 
     /**
      * The method processes the user's date input and displays
@@ -43,13 +33,7 @@ public class BpiDisplayService {
      *
      * @param keyboard Scanner input for getting input from user
      */
-    public void displayMaxAndMinBpiRates(Scanner keyboard) throws IOException {
-        out.println("Enter the start date of the period (YYYY-MM-DD): ");
-        String startPeriodDate = keyboard.next();
-
-        out.println("Enter the end date of the period (YYYY-MM-DD): ");
-        String endPeriodDate = keyboard.next();
-
+    public void displayMaxAndMinBpiRates(String startPeriodDate, String endPeriodDate) throws IOException {
         validationService.validateEnteredDates(startPeriodDate, endPeriodDate);
 
         Map<String, Double> bitcoinDateExchangeRateMap =
